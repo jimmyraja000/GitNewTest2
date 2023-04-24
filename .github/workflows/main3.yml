@@ -67,10 +67,15 @@ jobs:
          # name: myapp
           #path: artifacts/
 
-       - name: Deploy
-         uses: Azure/webapps-deploy@v2
+       - name: Deploy to iis
+         uses: microsoft/iis-web-app-deploy@v1
          with:
-            app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
-            publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
+            app-name: MyApp
             package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            werbsite-name: Default Web Site
+            #additional-iis-web-site-setting:
+      
+           
+            
+  
           
