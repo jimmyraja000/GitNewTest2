@@ -50,8 +50,8 @@ jobs:
     - name: Extract artifacts
       uses: actions/extract-archive@v2
       with:
-       archive-file: artifacts/myapp.zip
-       output-directory: ./artifacts
+       archive-file: ${{github.workspace}}/myapp.zip
+       output-directory: ${{github.workspace}}
     - name: run     
       run: |
            dir ./artifacts
