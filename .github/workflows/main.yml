@@ -46,7 +46,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
             name: myapp
-            path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            path: ./artifacts
+            # ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
 #     - name: run     
 #       run: |
 #            cd D:\a\GitNewTest2\GitNewTest2\bin\
