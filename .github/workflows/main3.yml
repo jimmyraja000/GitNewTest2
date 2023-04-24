@@ -42,11 +42,11 @@ jobs:
    #     name: MyProject artifacts
     #    path: bin/Release
       
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-            name: myapp
-            path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+   # - name: Upload artifacts
+    #  uses: actions/upload-artifact@v2
+     # with:
+      #      name: myapp
+       #     path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
    
   DeployDev:
       name: Dev
@@ -61,16 +61,16 @@ jobs:
       environment:
           name: Dev
       steps:
-       - name: Download artifacts
-         uses: actions/download-artifact@v2
-         with:
-          name: myapp
-          path: artifacts/
+      # - name: Download artifacts
+       #  uses: actions/download-artifact@v2
+        # with:
+         # name: myapp
+          #path: artifacts/
 
        - name: Deploy
          uses: Azure/webapps-deploy@v2
          with:
             app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
             publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
-            package: artifacts/
+            package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
           
