@@ -50,7 +50,7 @@ jobs:
     - name: Extract artifacts
       uses: actions/extract-archive@v2
       with:
-       archive-file:artifacts/myapp.zip
+       archive-file: artifacts/myapp.zip
        output-directory: ./artifacts
     - name: run     
       run: |
