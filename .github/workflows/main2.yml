@@ -52,4 +52,6 @@ jobs:
            dir
            cd GitNewTest2
            dir
+           cd bin
+           dir
 
