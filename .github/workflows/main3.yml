@@ -69,6 +69,7 @@ jobs:
 
        - name: Deploy to IIS
          run: |
+              start-process PowerShell -verb runas 
               iisreset /stop
               Copy-Item ./C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\* C:/inetpub/wwwroot/GitNewTest2 -Recurse -Force
               iisreset /start
