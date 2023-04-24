@@ -67,19 +67,14 @@ jobs:
          # name: myapp
           #path: artifacts/
 
-       - name: Deploy to iis
-         uses: microsoft/iis-web-app-deploy@v1
-         with:
-            app-name: GitNewTest2
-            package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
-            werbsite-name: Default Web Site
-            #additional-iis-web-site-setting:
-            auth-type: 'anonymous'
+       - name: Deploy to IIS
+         run: |
+              iisreset /stop
+              Copy-Item ./C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\bin/* C:/inetpub/wwwroot/GitNewTest2 -Recurse -Force
+              iisreset /start
          env:
           WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
           WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
-      
-           
-            
+  
   
           
