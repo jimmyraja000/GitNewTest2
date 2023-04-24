@@ -74,6 +74,9 @@ jobs:
             package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
             werbsite-name: Default Web Site
             #additional-iis-web-site-setting:
+         env:
+          WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+          WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
       
            
             
