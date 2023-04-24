@@ -70,9 +70,9 @@ jobs:
        - name: Deploy to IIS
          run: |
               # start-process PowerShell -verb runas 
-              AppExec iisreset /stop
+              iisreset /stop
               Copy-Item C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\* C:\inetpub\wwwroot\GitNewTest2 -Recurse -Force
-              AppExec iisreset /start
+              iisreset /start
          env:
           WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
           WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
