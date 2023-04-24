@@ -70,7 +70,7 @@ jobs:
        - name: Deploy to IIS
          run: |
               iisreset /stop
-              Copy-Item ./C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\bin/* C:/inetpub/wwwroot/GitNewTest2 -Recurse -Force
+              Copy-Item ./C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\* C:/inetpub/wwwroot/GitNewTest2 -Recurse -Force
               iisreset /start
          env:
           WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
