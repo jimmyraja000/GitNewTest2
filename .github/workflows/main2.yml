@@ -51,3 +51,6 @@ jobs:
     - name: run     
       run: |
            dir
+           cd GitNewTest2
+           dir
+
