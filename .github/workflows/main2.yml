@@ -10,7 +10,7 @@ env:
   
   AZURE_DEVWEBAPP_NAME: GitAc-Dev
   AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
-  AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+  AZURE_WEBAPP_PACKAGE_PATH: 'D:\GitNewTest2\GitNewTest2\bin\'
 jobs:
   Build:
     runs-on: windows-latest
@@ -46,8 +46,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
             name: myapp
-            path: ./artifacts
-            # ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
     - name: run     
       run: |
            dir
