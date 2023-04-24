@@ -1,0 +1,82 @@
+name: Deploy to Development Environment
+on:
+  push:
+    branches:
+       - master
+  pull_request:
+    branches:
+       - PrepRod
+env:
+  
+  AZURE_DEVWEBAPP_NAME: GitAc-Dev
+  AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+  AZURE_WEBAPP_PACKAGE_PATH: 'C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\bin'
+jobs:
+  Build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Restore NuGet packages
+      run: nuget restore GitNewTest2/GitNewTest2.sln
+
+    - name: build
+      run: |
+           msbuild GitNewTest2/GitNewTest2.sln /t:Build /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+    - name: publish
+      run: |
+           msbuild GitNewTest2/GitNewTest2.sln /t:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishDir="./artifacts"
+   
+      
+      #--output ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+      
+#    - name: Upload artifacts
+ #     uses: actions/upload-artifact@v2
+  #    with:
+   #     name: MyProject artifacts
+    #    path: bin/Release
+      
+   # - name: Upload artifacts
+    #  uses: actions/upload-artifact@v2
+     # with:
+      #      name: myapp
+       #     path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+   
+  DeployDev:
+      name: Dev
+      needs: Build
+#       if: github.event_name == 'refs/heads/master'
+      runs-on: self-hosted
+#       env:
+#         DEPLOYMENT_ENVIRONMENT: Dev
+#         AZURE_DEVWEBAPP_NAME: GitAc-Dev
+#         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+#         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+      environment:
+          name: Dev
+      steps:
+      # - name: Download artifacts
+       #  uses: actions/download-artifact@v2
+        # with:
+         # name: myapp
+          #path: artifacts/
+
+       - name: Deploy to IIS
+         run: |
+              # start-process PowerShell -verb runas 
+              iisreset /stop
+              Copy-Item C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\* C:\inetpub\wwwroot\GitNewTest2 -Recurse -Force
+              iisreset /start
+         env:
+          WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+          WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
+  
+  
+          
+
