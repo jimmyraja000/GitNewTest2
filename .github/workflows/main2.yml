@@ -54,4 +54,29 @@ jobs:
            dir
            cd bin
            dir
+  DeployDev:
+      name: Dev
+      needs: Build
+#       if: github.event_name == 'refs/heads/master'
+      runs-on: windows-latest
+#       env:
+#         DEPLOYMENT_ENVIRONMENT: Dev
+#         AZURE_DEVWEBAPP_NAME: GitAc-Dev
+#         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+#         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+      environment:
+          name: Dev
+      steps:
+       - name: Download artifacts
+         uses: actions/download-artifact@v2
+         with:
+          name: myapp
+          path: artifacts/
 
+       - name: Deploy
+         uses: Azure/webapps-deploy@v2
+         with:
+            app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
+            publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
+            package: artifacts/
+          
