@@ -82,7 +82,10 @@ jobs:
          run: |
              Import-Module WebAdministration
              New-Website -Name $env.WEBSITE_NAME -PhysicalPath "C:\inetpub\wwwroot\${{env.WEBSITE_NAME}} -ApplicationPool $env:APP_POOL_NAME
-
+       - name: config to use new appool
+         run: |
+             Import-Module WebAdministration
+             Set-ItemProperty -Path "IIS:\Sites\${{env.WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.APP_POOL_NAME}}
     
         
        - name: Deploy to IIS
