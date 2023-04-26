@@ -77,7 +77,7 @@ jobs:
        - name: crete new apppool
          run: |
              Import-Module WebAdministration
-             New-WebAppPool -Name $env.APP_POOL_NAME
+             New-WebAppPool -Name ${{env.APP_POOL_NAME}}
        - name: create website
          run: |
              Import-Module WebAdministration
