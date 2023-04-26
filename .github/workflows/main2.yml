@@ -47,19 +47,19 @@ jobs:
       with:
             name: myapp
             path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
-    - name: Extract artifacts
-      uses: actions/extract-archive@v2
-      with:
-       archive-file: ${{github.workspace}}
-       output-directory: ${{github.workspace}}
-    - name: run     
-      run: |
-           dir ./artifacts
-           dir
-           cd GitNewTest2
-           dir
-           cd bin
-           dir
+  #  - name: Extract artifacts
+   #   uses: actions/extract-archive@v2
+    #  with:
+     #  archive-file: ${{github.workspace}}
+      # output-directory: ${{github.workspace}}
+    #- name: run     
+     # run: |
+      #     dir ./artifacts
+       #    dir
+        #   cd GitNewTest2
+         #  dir
+          # cd bin
+           #dir
   DeployDev:
       name: Dev
       needs: Build
