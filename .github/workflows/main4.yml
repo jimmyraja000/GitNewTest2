@@ -58,11 +58,11 @@ jobs:
       needs: Build
 #       if: github.event_name == 'refs/heads/master'
       runs-on: self-hosted
-#       env:
-#         DEPLOYMENT_ENVIRONMENT: Dev
-#         AZURE_DEVWEBAPP_NAME: GitAc-Dev
-#         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
-#         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+      env:
+        WEBSITE_NAME: ${{secrets.WEBSITE_NAME}}
+        APP_POOL_NAME: ${{secrets.APP_POOL_NAME}}
+        WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+        WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
       environment:
           name: Dev
       steps:
