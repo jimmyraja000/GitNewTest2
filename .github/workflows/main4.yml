@@ -81,7 +81,7 @@ jobs:
        - name: create website
          run: |
              Import-Module WebAdministration
-             New-Website -Name ${{env.WEBSITE_NAME}} -PhysicalPath "C:\inetpub\wwwroot\${{env.WEBSITE_NAME}} -ApplicationPool ${{env.APP_POOL_NAME}}
+             New-Website -Name ${{env.WEBSITE_NAME}} -PhysicalPath "C:\inetpub\wwwroot\${{env.WEBSITE_NAME}}" -ApplicationPool ${{env.APP_POOL_NAME}}
        - name: config to use new appool
          run: |
              Import-Module WebAdministration
