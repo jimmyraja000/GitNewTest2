@@ -86,7 +86,7 @@ jobs:
        - name: config to use new appool
          run: |
              Import-Module WebAdministration
-             Set-ItemProperty -Path "IIS:\Sites\${{env.WEBSITE_NAME}}" -Name "applicationPool" -Value $env: APP_POOL_NAME
+             Set-ItemProperty -Path "IIS:\Sites\${{env.WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.APP_POOL_NAME}}
         
        - name: Deploy to IIS
          run: |
