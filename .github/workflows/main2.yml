@@ -1,4 +1,4 @@
-name: 1Deploy to Development Environment
+name: DEEEEDeploy to Development Environment
 on:
   push:
     branches:
