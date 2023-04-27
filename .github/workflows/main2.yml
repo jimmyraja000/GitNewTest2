@@ -60,29 +60,70 @@ jobs:
          #  dir
           # cd bin
            #dir
-  DeployDev:
-      name: Dev
-      needs: Build
-#       if: github.event_name == 'refs/heads/master'
-      runs-on: windows-latest
-#       env:
-#         DEPLOYMENT_ENVIRONMENT: Dev
-#         AZURE_DEVWEBAPP_NAME: GitAc-Dev
-#         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
-#         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
-      environment:
-          name: Dev
-      steps:
-       - name: Download artifacts
-         uses: actions/download-artifact@v2
-         with:
-          name: myapp
-          path: artifacts/
+#   DeployDev:
+#       name: Dev
+#       needs: Build
+# #       if: github.event_name == 'refs/heads/master'
+#       runs-on: windows-latest
+# #       env:
+# #         DEPLOYMENT_ENVIRONMENT: Dev
+# #         AZURE_DEVWEBAPP_NAME: GitAc-Dev
+# #         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+# #         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+#       environment:
+#           name: Dev
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: myapp
+        path: C:\actions-runner5
 
-       - name: Deploy
-         uses: Azure/webapps-deploy@v2
-         with:
-            app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
-            publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
-            package: artifacts/
-          
+#        - name: Deploy
+#          uses: Azure/webapps-deploy@v2
+#          with:
+#             app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
+#             publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
+#             package: artifacts/
+#   DeployDev:
+#       name: Dev
+#       needs: Build
+# #       if: github.event_name == 'refs/heads/master'
+#       runs-on: self-hosted
+#       env:
+#         DEV_WEBSITE_NAME: ${{secrets.DEV_WEBSITE_NAME}}
+#         DEV_APP_POOL_NAME: ${{secrets.DEV_APP_POOL_NAME}}
+# #         WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+# #         WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
+#       environment:
+#           name: Dev
+#       steps:
+#       # - name: Download artifacts
+#        #  uses: actions/download-artifact@v2
+#         # with:
+#          # name: myapp
+#           #path: artifacts/
+#        - name: copying
+#          run: |
+#               Set-ExecutionPolicy RemoteSigned
+#               & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestScript.ps1
+        
+#               cd C:\inetpub\wwwroot\
+ 
+#               Copy-Item C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
+
+#        - name: create new apppool
+#          run: |
+#              & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestAppPool.ps1
+#        - name: create website
+#          run: |
+#               & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestWebsite.ps1
+#        - name: config to use new appool
+#          run: |
+#              Import-Module WebAdministration
+#              Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
+#        - name: Deploy to IIS
+#          run: |
+#               # start-process PowerShell -verb runas 
+#               iisreset /stop
+#               iisreset /start
+
