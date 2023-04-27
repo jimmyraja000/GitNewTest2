@@ -46,7 +46,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
             name: myapp
-            path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            path: bin/Release/
+            # ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
   #  - name: Extract artifacts
    #   uses: actions/extract-archive@v2
     #  with:
