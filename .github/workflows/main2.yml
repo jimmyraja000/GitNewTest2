@@ -178,6 +178,7 @@ jobs:
           - name: create website
             run: |
                Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+               Import-Module WebAdministration
                & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
           - name: config to use new appool
             run: |
