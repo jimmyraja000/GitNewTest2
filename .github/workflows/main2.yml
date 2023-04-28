@@ -121,11 +121,13 @@ jobs:
             
           - name: copying
             run: |
-               & ${{ github.workspace }}/GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1
+                 $path="${{ github.workspace }}/GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1"
+                 echo $path
+                 & $path
         
-               cd C:\inetpub\wwwroot\
-               dir
-               Copy-Item C:\app.publish\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
+                 cd C:\inetpub\wwwroot\
+                 dir
+                 Copy-Item C:\app.publish\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
 
 
 #        - name: Deploy
