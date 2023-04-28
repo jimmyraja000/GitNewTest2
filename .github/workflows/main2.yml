@@ -113,11 +113,15 @@ jobs:
        environment:
             name: Dev
        steps:
+       
           - name: Download artifacts
             uses: actions/download-artifact@v2
             with:
              name: myapp
              path: 'C:\app.publish'
+             
+          - name: Checkout code
+            uses: actions/checkout@v2
             
           - name: copying
             run: |
