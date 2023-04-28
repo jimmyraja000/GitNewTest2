@@ -121,8 +121,6 @@ jobs:
             
           - name: copying
             run: |
-              # & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestScript.ps1
-              # & ./GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1
                & ${{ github.workspace }}/GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1
         
                cd C:\inetpub\wwwroot\
