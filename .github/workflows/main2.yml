@@ -103,6 +103,32 @@ jobs:
       run: |
           Invoke-WebRequest https://download.microsoft.com/download/9/1/7/917AEB5A-79A9-46D3-8F88-2C1F585C5984/WebDeploy_amd64_en-US.msi -OutFile webdeploy.msi
           Start-Process msiexec.exe -Wait -ArgumentList '/i webdeploy.msi /qn /norestart'
+          
+  DeployDev:
+       name: Dev
+       needs: Build
+        # if: github.event_name == 'refs/heads/master'
+       runs-on: self-hosted
+#        env:
+#          DEV_WEBSITE_NAME: ${{secrets.DEV_WEBSITE_NAME}}
+#          DEV_APP_POOL_NAME: ${{secrets.DEV_APP_POOL_NAME}}
+#          WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+#          WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
+#        environment:
+#            name: Dev
+       steps:
+          - name: Download artifacts
+            uses: actions/download-artifact@v2
+            with:
+             name: myapp
+             path: 'C:\app.publish'
+          - name: copying
+            run: |
+              # & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestScript.ps1
+        
+               cd C:\inetpub\wwwroot\
+               dir
+               Copy-Item C:\app.publish\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
 
 
 #        - name: Deploy
