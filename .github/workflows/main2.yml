@@ -169,22 +169,22 @@ jobs:
  
 #               Copy-Item C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
 
-#        - name: create new apppool
-#          run: |
-#              & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestAppPool.ps1
-#        - name: create website
-#          run: |
-#               & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestWebsite.ps1
-#        - name: config to use new appool
-#          run: |
-#              Import-Module WebAdministration
-#              Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
+          - name: create new apppool
+            run: |
+              & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
+          - name: create website
+            run: |
+               & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
+          - name: config to use new appool
+            run: |
+              Import-Module WebAdministration
+              Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
 
          
        
-#        - name: Deploy to IIS
-#          run: |
-#               # start-process PowerShell -verb runas 
-#               iisreset /stop
-#               iisreset /start
+          - name: Deploy to IIS
+            run: |
+               start-process PowerShell -verb runas 
+               iisreset /stop
+               iisreset /start
 
