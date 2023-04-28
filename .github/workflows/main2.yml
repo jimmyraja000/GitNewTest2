@@ -171,8 +171,7 @@ jobs:
 
           - name: create new apppool
             run: |
-                 
-
+                 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
                  Start-Process powershell.exe -Verb RunAs -ArgumentList "-File C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1"
                  
                  # & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
