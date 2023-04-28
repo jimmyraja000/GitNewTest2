@@ -101,6 +101,9 @@ jobs:
  
           
   DeployDev:
+       
+     
+      
        name: Dev
        needs: Build
         # if: github.event_name == 'refs/heads/master'
@@ -113,7 +116,8 @@ jobs:
        environment:
             name: Dev
        steps:
-       
+          - name: Checkout Code 
+            uses: actions/checkout@v2
           - name: Download artifacts
             uses: actions/download-artifact@v2
             with:
