@@ -80,7 +80,13 @@ jobs:
     - name: running
       run: |
            Get-location
+           
+    - name: running2
+      run: |
            dir
+           
+    - name: running3
+      run: |
            cd C:\app.publish
            dir
 
