@@ -77,6 +77,12 @@ jobs:
       with:
         name: myapp
         path: 'C:\app.publish'
+    - name: running
+      run: |
+           Get-location
+           dir
+           cd C:\app.publish
+           dir
 
 
 #        - name: Deploy
