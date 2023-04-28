@@ -172,9 +172,10 @@ jobs:
           - name: create new apppool
             run: |
                  
-                 Import-Module WebAdministration
+
+                 Start-Process powershell.exe -Verb RunAs -ArgumentList "-File C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1"
                  
-                 & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
+                 # & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
           - name: create website
             run: |
                & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
