@@ -1,4 +1,3 @@
-import-module webadministration
 
 $DEV_APP_POOL_NAME="DevAPP_POOL_NAME"
 
