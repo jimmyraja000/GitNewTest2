@@ -55,12 +55,7 @@ jobs:
     - name: running6
       run: |
            dir D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin
-           
-    - name: running8
-      run: |
-           cd D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin\Release
-           dir        
-    
+         
   #  - name: Extract artifacts
    #   uses: actions/extract-archive@v2
     #  with:
@@ -103,6 +98,11 @@ jobs:
       run: |
            cd C:\app.publish
            dir
+           
+    - name: Install Web Deploy
+      run: |
+          Invoke-WebRequest https://download.microsoft.com/download/9/1/7/917AEB5A-79A9-46D3-8F88-2C1F585C5984/WebDeploy_amd64_en-US.msi -OutFile webdeploy.msi
+          Start-Process msiexec.exe -Wait -ArgumentList '/i webdeploy.msi /qn /norestart'
 
 
 #        - name: Deploy
@@ -148,6 +148,9 @@ jobs:
 #          run: |
 #              Import-Module WebAdministration
 #              Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
+
+         
+       
 #        - name: Deploy to IIS
 #          run: |
 #               # start-process PowerShell -verb runas 
