@@ -119,9 +119,7 @@ jobs:
             with:
              name: myapp
              path: 'C:\app.publish'
-             
-          - name: Checkout code
-            uses: actions/checkout@v2
+           
             
           - name: copying
             run: |
