@@ -98,11 +98,7 @@ jobs:
       run: |
            cd C:\app.publish
            dir
-           
-    - name: Install Web Deploy
-      run: |
-          Invoke-WebRequest https://download.microsoft.com/download/9/1/7/917AEB5A-79A9-46D3-8F88-2C1F585C5984/WebDeploy_amd64_en-US.msi -OutFile webdeploy.msi
-          Start-Process msiexec.exe -Wait -ArgumentList '/i webdeploy.msi /qn /norestart'
+ 
           
   DeployDev:
        name: Dev
