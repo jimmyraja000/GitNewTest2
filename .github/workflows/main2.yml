@@ -125,7 +125,7 @@ jobs:
             
           - name: copying
             run: |
-                 $path="${{ github.workspace }}/GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1"
+                 $path="$GITHUB_WORKSPACE/GitNewTest2/GitNewTest2/Scripts/DevTestScript.ps1"
                  echo $path
                  & $path
         
