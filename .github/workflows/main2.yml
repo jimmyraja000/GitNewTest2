@@ -177,15 +177,18 @@ jobs:
                  # & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
           - name: create website
             run: |
+               Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
                & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
           - name: config to use new appool
             run: |
+              Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
               Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
 
          
        
           - name: Deploy to IIS
             run: |
+               #Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
                start-process PowerShell -verb runas 
                iisreset /stop
                iisreset /start
