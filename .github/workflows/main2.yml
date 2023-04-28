@@ -47,6 +47,20 @@ jobs:
       with:
             name: myapp
             path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            
+    - name: running1
+      run: |
+           Get-location
+           
+    - name: running6
+      run: |
+           dir D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin
+           
+    - name: running8
+      run: |
+           cd D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin\Release
+           dir        
+    
   #  - name: Extract artifacts
    #   uses: actions/extract-archive@v2
     #  with:
