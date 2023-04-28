@@ -177,7 +177,6 @@ jobs:
                & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
           - name: config to use new appool
             run: |
-              Import-Module WebAdministration
               Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
 
          
