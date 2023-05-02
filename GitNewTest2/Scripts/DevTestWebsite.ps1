@@ -12,6 +12,6 @@ else
 {
 "Website is not present"
 "Creating new WebSite"
-New-Website -Name "$DEV_WEBSITE_NAME" -PhysicalPath "C:\inetpub\wwwroot\$DEV_WEBSITE_NAME" -ApplicationPool "$DEV_APP_POOL_NAME" -Force
+New-Website -Name "$DEV_WEBSITE_NAME" -PhysicalPath "I:\inetpub\wwwroot\$DEV_WEBSITE_NAME" -ApplicationPool "$DEV_APP_POOL_NAME" -Force
 return $false;
 }
