@@ -1,4 +1,4 @@
-Set-ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 import-module webadministration
 $DEV_APP_POOL_NAME= "DevAPP_POOL_NAME"
 $DEV_WEBSITE_NAME="DevGit_New_Test2"
