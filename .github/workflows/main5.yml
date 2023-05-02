@@ -1,0 +1,100 @@
+name: CHECKDEEEEDeploy to Development Environment
+on:
+  push:
+    branches:
+       - master
+  pull_request:
+    branches:
+       - PrepRod
+env:
+  
+  AZURE_DEVWEBAPP_NAME: GitAc-Dev
+  AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+  AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\GitNewTest2\'
+jobs:
+  Build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Restore NuGet packages
+      run: nuget restore GitNewTest2/GitNewTest2.sln
+
+    - name: build
+      run: |
+           msbuild GitNewTest2/GitNewTest2.sln /t:Build /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+    - name: publish
+      run: |
+           msbuild GitNewTest2/GitNewTest2.sln /t:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishDir="./artifacts"
+   
+      
+      #--output ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+      
+#    - name: Upload artifacts
+ #     uses: actions/upload-artifact@v2
+  #    with:
+   #     name: MyProject artifacts
+    #    path: bin/Release
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+            name: myapp
+            path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+            
+    - name: running1
+      run: |
+           Get-location
+           
+    - name: running6
+      run: |
+           dir D:\a\GitNewTest2\GitNewTest2\GitNewTest2\
+         
+  #  - name: Extract artifacts
+   #   uses: actions/extract-archive@v2
+    #  with:
+     #  archive-file: ${{github.workspace}}
+      # output-directory: ${{github.workspace}}
+    #- name: run     
+     # run: |
+      #     dir ./artifacts
+       #    dir
+        #   cd GitNewTest2
+         #  dir
+          # cd bin
+           #dir
+#   DeployDev:
+#       name: Dev
+#       needs: Build
+# #       if: github.event_name == 'refs/heads/master'
+#       runs-on: windows-latest
+# #       env:
+# #         DEPLOYMENT_ENVIRONMENT: Dev
+# #         AZURE_DEVWEBAPP_NAME: GitAc-Dev
+# #         AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
+# #         AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\bin\'
+#       environment:
+#           name: Dev
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: myapp
+        path: 'C:\app.publish'
+    - name: running
+      run: |
+           Get-location
+           
+    - name: running2
+      run: |
+           dir
+           
+    - name: running3
+      run: |
+           cd C:\app.publish
+           dir
