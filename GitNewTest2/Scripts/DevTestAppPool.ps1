@@ -4,7 +4,7 @@ Get-Module WebAdministration
 
 $DEV_APP_POOL_NAME="DevAPP_POOL_NAME"
 
-if(Test-Path IIS:\AppPools\$AppPoolName)
+if(Test-Path IIS:\AppPools\$DEV_APP_POOL_NAME)
 {
 "AppPool is already there"
 return $true;
