@@ -1,6 +1,5 @@
+Set-ExecutionPolicy RemoteSigned
 import-module -name WebAdministration
-Get-PSDrive IIS
-get-childitem 'IIS:\sites'
 Get-Module WebAdministration
 
 $DEV_APP_POOL_NAME="DevAPP_POOL_NAME"
