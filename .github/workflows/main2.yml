@@ -10,7 +10,7 @@ env:
   
   AZURE_DEVWEBAPP_NAME: GitAc-Dev
   AZURE_PREPRODWEBAPP_NAME: GitAc-PreProd
-  AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin'
+  AZURE_WEBAPP_PACKAGE_PATH: 'D:\a\GitNewTest2\GitNewTest2\GitNewTest2\'
 jobs:
   Build:
     runs-on: windows-latest
@@ -54,7 +54,7 @@ jobs:
            
     - name: running6
       run: |
-           dir D:\a\GitNewTest2\GitNewTest2\GitNewTest2\bin
+           dir D:\a\GitNewTest2\GitNewTest2\GitNewTest2\
          
   #  - name: Extract artifacts
    #   uses: actions/extract-archive@v2
