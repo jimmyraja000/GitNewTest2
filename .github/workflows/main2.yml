@@ -133,7 +133,7 @@ jobs:
         
                  cd C:\inetpub\wwwroot\
                  dir
-                 Copy-Item C:\app.publish\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
+                 Copy-Item C:\app.publish\* I:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
 
 
 #        - name: Deploy
