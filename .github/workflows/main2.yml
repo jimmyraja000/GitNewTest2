@@ -171,13 +171,13 @@ jobs:
 
           - name: create new apppool
             run: |
-                 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+                 Set-ExecutionPolicy RemoteSigned
                  Start-Process powershell.exe -Verb RunAs -ArgumentList "-File C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1"
                  
                  # & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
           - name: create website
             run: |
-               Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+               Set-ExecutionPolicy RemoteSigned
                Import-Module WebAdministration
                & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
           - name: config to use new appool
@@ -191,7 +191,7 @@ jobs:
           - name: Deploy to IIS
             run: |
                #Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-               start-process PowerShell -verb runas 
+               Set-ExecutionPolicy RemoteSigned
                iisreset /stop
                iisreset /start
 
