@@ -98,3 +98,99 @@ jobs:
       run: |
            cd C:\app.publish
            dir
+           
+           
+  DeployDev:
+       
+     
+      
+       name: Dev
+       needs: Build
+        # if: github.event_name == 'refs/heads/master'
+       runs-on: self-hosted
+       env:
+          DEV_WEBSITE_NAME: ${{secrets.DEV_WEBSITE_NAME}}
+          DEV_APP_POOL_NAME: ${{secrets.DEV_APP_POOL_NAME}}
+          WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+          WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
+       environment:
+            name: Dev
+       steps:
+          - name: Checkout Code 
+            uses: actions/checkout@v2
+          - name: Download artifacts
+            uses: actions/download-artifact@v2
+            with:
+             name: myapp
+             path: 'C:\app.publish'
+           
+            
+          - name: copying
+            run: |
+                 $path="${{github.workspace}}\GitNewTest2\Scripts\DevTestScript.ps1"
+                 echo $path
+                 & $path
+        
+                 cd C:\inetpub\wwwroot\
+                 dir
+                 Copy-Item C:\app.publish\* I:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
+
+
+#        - name: Deploy
+#          uses: Azure/webapps-deploy@v2
+#          with:
+#             app-name: ${{env.AZURE_DEVWEBAPP_NAME}}
+#             publish-profile: ${{secrets.AZURE_DEVPUBLISH_PROFILE}}
+#             package: artifacts/
+#   DeployDev:
+#       name: Dev
+#       needs: Build
+# #       if: github.event_name == 'refs/heads/master'
+#       runs-on: self-hosted
+#       env:
+#         DEV_WEBSITE_NAME: ${{secrets.DEV_WEBSITE_NAME}}
+#         DEV_APP_POOL_NAME: ${{secrets.DEV_APP_POOL_NAME}}
+# #         WEBAPP_MSDeploy_USERNAME: ${{secrets.IIS_USERNAME}}
+# #         WEBAPP_MSDeploy_PASSWORD: ${{secrets.IIS_PASSWORD}}
+#       environment:
+#           name: Dev
+#       steps:
+#       # - name: Download artifacts
+#        #  uses: actions/download-artifact@v2
+#         # with:
+#          # name: myapp
+#           #path: artifacts/
+#        - name: copying
+#          run: |
+#               Set-ExecutionPolicy RemoteSigned
+#               & C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\Psscripts\DevTestScript.ps1
+        
+#               cd C:\inetpub\wwwroot\
+ 
+#               Copy-Item C:\actions-runner5\_work\Git_Final_Test\Git_Final_Test\Git_Final_Test\* C:\inetpub\wwwroot\${{env.DEV_WEBSITE_NAME}} -Recurse -Force
+
+          - name: create new apppool
+            run: |
+                 Set-ExecutionPolicy RemoteSigned
+                 Start-Process powershell.exe -Verb RunAs -ArgumentList "-File C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1"
+                 
+                 # & C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestAppPool.ps1
+          - name: create website
+            run: |
+               # Set-ExecutionPolicy RemoteSigned
+               #Import-Module WebAdministration
+               C:\actions-runner\_work\GitNewTest2\GitNewTest2\GitNewTest2\Scripts\DevTestWebsite.ps1
+          - name: config to use new appool
+            run: |
+              Set-ExecutionPolicy RemoteSigned
+              Import-Module WebAdministration
+              Set-ItemProperty -Path "IIS:\Sites\${{env.DEV_WEBSITE_NAME}}" -Name "applicationPool" -Value ${{env.DEV_APP_POOL_NAME}}
+         
+       
+          - name: Deploy to IIS
+            run: |
+               #Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+               Set-ExecutionPolicy RemoteSigned
+               iisreset /stop
+               iisreset /start
+
